@@ -1,0 +1,570 @@
+{
+  "blocklist_overlap": {
+    "available": false,
+    "reason": "threat_intel features not enabled for this dataset"
+  },
+  "caveats": [
+    "No labels: nothing here measures detection accuracy. Tiers are score quantiles on the validation split.",
+    "Attack-heavy logs make 'normal' hard to define; the model learns whatever dominates the training windows.",
+    "The weak proxy is built from a model input and is only a sanity check.",
+    "Cross-domain scoring with the synthetic-trained model is a distribution-shift demonstration, not an evaluation."
+  ],
+  "cross_domain": {
+    "available": true,
+    "grouping": "user",
+    "limitation": "The model was trained on synthetic normal behaviour grouped by user; a large flagged share mostly reflects domain shift (different users, rates and attack-heavy traffic), not detection accuracy.",
+    "model": "iforest_seed42",
+    "most_shifted_features": [
+      {
+        "feature": "hour_deviation",
+        "real_median": 1.8549635466084222,
+        "shift_in_robust_units": 0.1043843324756716,
+        "synthetic_normal_median": 1.698658392
+      },
+      {
+        "feature": "hour_sin",
+        "real_median": -0.06540312923014287,
+        "shift_in_robust_units": 0.053189873572700885,
+        "synthetic_normal_median": -0.1088668749
+      },
+      {
+        "feature": "hour_cos",
+        "real_median": -0.8127983242782371,
+        "shift_in_robust_units": 0.01978785148647861,
+        "synthetic_normal_median": -0.8191520443
+      },
+      {
+        "feature": "failed_count",
+        "real_median": 0.0,
+        "shift_in_robust_units": 0.0,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "failed_ratio",
+        "real_median": 0.0,
+        "shift_in_robust_units": 0.0,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "max_failed_burst_60s",
+        "real_median": 0.0,
+        "shift_in_robust_units": 0.0,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "consecutive_failed_max",
+        "real_median": 0.0,
+        "shift_in_robust_units": 0.0,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "distinct_hosts_failed",
+        "real_median": 0.0,
+        "shift_in_robust_units": 0.0,
+        "synthetic_normal_median": 0.0
+      }
+    ],
+    "score_quantiles": {
+      "0.5": 0.37095999302038324,
+      "0.9": 0.6552820050799643,
+      "0.99": 0.7982822167134712
+    },
+    "share_flagged": 0.15083333333333335,
+    "tiers": {
+      "CRITICAL": 54,
+      "HIGH": 0,
+      "LOW": 106,
+      "MEDIUM": 21,
+      "NORMAL": 1019
+    },
+    "windows": 1200
+  },
+  "dataset": "synthetic_unlabeled_demo",
+  "group_by": "src_ip",
+  "labels": "none (unlabeled): no precision, recall or F1 are computed",
+  "model_id": "iforest_seed42",
+  "n_windows": 1644,
+  "parse": {
+    "coverage_all_lines": 0.953286,
+    "coverage_sshd_lines": 1.0,
+    "duplicate_lines_dropped": 0,
+    "event_lines": 6918,
+    "ignored_redundant_lines": 0,
+    "malformed_lines": 3,
+    "not_sshd_lines": 336,
+    "timestamp_regressions": 0,
+    "total_lines": 7257,
+    "unsupported_sshd_lines": 0,
+    "year_rollovers": 0
+  },
+  "rules": {
+    "flagged_by_rule_only": 0,
+    "hits_total": {
+      "R1": 0,
+      "R2": 10,
+      "R3": 0
+    },
+    "unavailable": [
+      "R1 unavailable (missing ['distinct_src_ips'])",
+      "R3 unavailable (missing ['blocklisted_ip_count'])"
+    ]
+  },
+  "score_distribution": {
+    "by_split_median": {
+      "test": 0.493848927644767,
+      "train": 0.4491239430911456,
+      "val": 0.4183797246672586
+    },
+    "histogram": {
+      "counts": [
+        409,
+        257,
+        122,
+        59,
+        130,
+        137,
+        166,
+        101,
+        69,
+        63,
+        68,
+        23,
+        11,
+        6,
+        2,
+        3,
+        3,
+        7,
+        6,
+        2
+      ],
+      "edges": [
+        0.36577781446406765,
+        0.3876793266359059,
+        0.40958083880774415,
+        0.4314823509795824,
+        0.45338386315142065,
+        0.4752853753232589,
+        0.4971868874950971,
+        0.5190883996669353,
+        0.5409899118387735,
+        0.5628914240106119,
+        0.5847929361824501,
+        0.6066944483542883,
+        0.6285959605261265,
+        0.6504974726979649,
+        0.6723989848698031,
+        0.6943004970416413,
+        0.7162020092134795,
+        0.7381035213853178,
+        0.760005033557156,
+        0.7819065457289942,
+        0.8038080579008325
+      ]
+    },
+    "quantiles": {
+      "0.0": 0.36577781446406765,
+      "0.25": 0.3878180516589113,
+      "0.5": 0.4463705085523091,
+      "0.75": 0.5094523974831768,
+      "0.9": 0.5754115899654448,
+      "0.95": 0.6013037336546035,
+      "0.99": 0.7302768755097402,
+      "0.999": 0.7782737868483122,
+      "1.0": 0.8038080579008325
+    }
+  },
+  "tier_basis": "UNLABELED: tiers are score quantiles, meaning unusual for this log, not attack probability",
+  "tier_thresholds": {
+    "CRITICAL": 0.7566052935924932,
+    "HIGH": 0.7251773864909599,
+    "LOW": 0.6058571974711402,
+    "MEDIUM": 0.6229621436851466
+  },
+  "tiers": {
+    "all": {
+      "CRITICAL": 16,
+      "HIGH": 5,
+      "LOW": 19,
+      "MEDIUM": 26,
+      "NORMAL": 1578
+    },
+    "test": {
+      "CRITICAL": 5,
+      "HIGH": 1,
+      "LOW": 5,
+      "MEDIUM": 6,
+      "NORMAL": 312
+    },
+    "train": {
+      "CRITICAL": 9,
+      "HIGH": 2,
+      "LOW": 4,
+      "MEDIUM": 17,
+      "NORMAL": 954
+    },
+    "val": {
+      "CRITICAL": 2,
+      "HIGH": 2,
+      "LOW": 10,
+      "MEDIUM": 3,
+      "NORMAL": 312
+    }
+  },
+  "top_windows": [
+    {
+      "entity": "134.55.56.29",
+      "evidence": [
+        "max_failed_burst_60s=63 (typical 0, +19.8 robust deviations)",
+        "event_count=210 (typical 2, +16.7 robust deviations)",
+        "failed_count=105 (typical 0, +16.6 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.8038,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-16 01:00:00+00:00"
+    },
+    {
+      "entity": "160.125.134.154",
+      "evidence": [
+        "max_failed_burst_60s=53 (typical 0, +16.7 robust deviations)",
+        "event_count=204 (typical 2, +16.2 robust deviations)",
+        "failed_count=102 (typical 0, +16.2 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7864,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-04 23:00:00+00:00"
+    },
+    {
+      "entity": "46.180.233.202",
+      "evidence": [
+        "event_count=204 (typical 2, +16.2 robust deviations)",
+        "failed_count=102 (typical 0, +16.2 robust deviations)",
+        "consecutive_failed_max=102 (typical 0, +16.2 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7738,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-03 08:05:00+00:00"
+    },
+    {
+      "entity": "11.188.137.121",
+      "evidence": [
+        "max_failed_burst_60s=62 (typical 0, +19.5 robust deviations)",
+        "event_count=240 (typical 2, +19.1 robust deviations)",
+        "failed_count=120 (typical 0, +19.0 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7685,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-05 18:45:00+00:00"
+    },
+    {
+      "entity": "76.77.16.247",
+      "evidence": [
+        "max_failed_burst_60s=43 (typical 0, +13.5 robust deviations)",
+        "failed_count=62 (typical 0, +9.8 robust deviations)",
+        "consecutive_failed_max=62 (typical 0, +9.8 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7684,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-13 05:10:00+00:00"
+    },
+    {
+      "entity": "112.159.153.1",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=16.8623 (typical 0, +8.1 robust deviations)",
+        "max_failed_burst_60s=13 (typical 0, +4.1 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7652,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-12 04:55:00+00:00"
+    },
+    {
+      "entity": "80.38.212.172",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=19.5602 (typical 0, +9.4 robust deviations)",
+        "distinct_event_types=4 (typical 1, +5.2 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7651,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-10 09:55:00+00:00"
+    },
+    {
+      "entity": "119.24.241.168",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=11.4663 (typical 0, +5.5 robust deviations)",
+        "distinct_event_types=3 (typical 1, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.762,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-08 22:55:00+00:00"
+    },
+    {
+      "entity": "41.218.240.63",
+      "evidence": [
+        "max_failed_burst_60s=43 (typical 0, +13.5 robust deviations)",
+        "failed_count=83 (typical 0, +13.2 robust deviations)",
+        "consecutive_failed_max=83 (typical 0, +13.2 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7588,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-13 20:25:00+00:00"
+    },
+    {
+      "entity": "154.52.14.10",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=12.8153 (typical 0, +6.1 robust deviations)",
+        "hour_deviation=11.886 (typical 1.85167, +3.9 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7587,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-07 02:00:00+00:00"
+    },
+    {
+      "entity": "195.95.144.190",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=11.4663 (typical 0, +5.5 robust deviations)",
+        "distinct_event_types=3 (typical 1, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7547,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-04 06:20:00+00:00"
+    },
+    {
+      "entity": "5.101.194.134",
+      "evidence": [
+        "max_failed_burst_60s=36 (typical 0, +11.3 robust deviations)",
+        "failed_count=69 (typical 0, +10.9 robust deviations)",
+        "consecutive_failed_max=69 (typical 0, +10.9 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7518,
+      "tier": "HIGH",
+      "window_start": "2025-03-11 09:55:00+00:00"
+    },
+    {
+      "entity": "55.24.226.115",
+      "evidence": [
+        "event_rate_z=20 (typical 0, +9.6 robust deviations)",
+        "failed_count=42 (typical 0, +6.7 robust deviations)",
+        "consecutive_failed_max=42 (typical 0, +6.7 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.749,
+      "tier": "HIGH",
+      "window_start": "2025-03-09 09:30:00+00:00"
+    },
+    {
+      "entity": "89.20.74.235",
+      "evidence": [
+        "event_rate_z=20 (typical 0, +9.6 robust deviations)",
+        "max_failed_burst_60s=22 (typical 0, +6.9 robust deviations)",
+        "failed_count=32 (typical 0, +5.1 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7439,
+      "tier": "HIGH",
+      "window_start": "2025-03-08 10:55:00+00:00"
+    },
+    {
+      "entity": "102.176.131.69",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=16.8623 (typical 0, +8.1 robust deviations)",
+        "max_failed_burst_60s=13 (typical 0, +4.1 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7381,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-08 15:30:00+00:00"
+    },
+    {
+      "entity": "130.66.103.18",
+      "evidence": [
+        "event_rate_z=20 (typical 0, +9.6 robust deviations)",
+        "max_failed_burst_60s=24 (typical 0, +7.6 robust deviations)",
+        "failed_count=41 (typical 0, +6.5 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.7363,
+      "tier": "HIGH",
+      "window_start": "2025-03-10 23:40:00+00:00"
+    },
+    {
+      "entity": "201.154.161.112",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=7.4194 (typical 0, +3.5 robust deviations)",
+        "distinct_event_types=3 (typical 1, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7305,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-03 00:30:00+00:00"
+    },
+    {
+      "entity": "137.22.134.197",
+      "evidence": [
+        "max_failed_burst_60s=40 (typical 0, +12.6 robust deviations)",
+        "failed_count=71 (typical 0, +11.3 robust deviations)",
+        "consecutive_failed_max=71 (typical 0, +11.3 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.73,
+      "tier": "HIGH",
+      "window_start": "2025-03-14 18:45:00+00:00"
+    },
+    {
+      "entity": "29.107.71.175",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=7.4194 (typical 0, +3.5 robust deviations)",
+        "distinct_event_types=3 (typical 1, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7113,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-16 17:55:00+00:00"
+    },
+    {
+      "entity": "218.158.3.144",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "event_rate_z=7.4194 (typical 0, +3.5 robust deviations)",
+        "distinct_event_types=3 (typical 1, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.7044,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-14 19:10:00+00:00"
+    },
+    {
+      "entity": "130.66.103.18",
+      "evidence": [
+        "event_rate_z=13.4898 (typical 0, +6.5 robust deviations)",
+        "max_failed_burst_60s=11 (typical 0, +3.5 robust deviations)",
+        "hour_deviation=9.63596 (typical 1.85167, +3.0 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6965,
+      "tier": "MEDIUM",
+      "window_start": "2025-03-10 23:45:00+00:00"
+    },
+    {
+      "entity": "101.130.11.69",
+      "evidence": [
+        "event_rate_z=20 (typical 0, +9.6 robust deviations)",
+        "max_failed_burst_60s=17 (typical 0, +5.4 robust deviations)",
+        "failed_count=23 (typical 0, +3.6 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6872,
+      "tier": "MEDIUM",
+      "window_start": "2025-03-06 14:40:00+00:00"
+    },
+    {
+      "entity": "168.209.166.62",
+      "evidence": [
+        "R2 success after failures: a login succeeded after repeated failed attempts in the same window",
+        "success_after_failed=1 (typical 0, +10.0 robust deviations)",
+        "distinct_event_types=4 (typical 1, +5.2 robust deviations)",
+        "event_rate_z=7.4194 (typical 0, +3.5 robust deviations)"
+      ],
+      "rules": [
+        "R2"
+      ],
+      "score": 0.6846,
+      "tier": "CRITICAL",
+      "window_start": "2025-03-13 13:00:00+00:00"
+    },
+    {
+      "entity": "139.70.168.74",
+      "evidence": [
+        "hour_deviation=11.3026 (typical 1.85167, +3.7 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6684,
+      "tier": "MEDIUM",
+      "window_start": "2025-03-15 01:25:00+00:00"
+    },
+    {
+      "entity": "49.250.1.72",
+      "evidence": [],
+      "rules": [],
+      "score": 0.6666,
+      "tier": "MEDIUM",
+      "window_start": "2025-03-08 23:10:00+00:00"
+    }
+  ],
+  "unattributed_events": 1312,
+  "unsupported_top_patterns": {},
+  "weak_proxy": {
+    "definition": "window has at least 5 failed logins",
+    "proxy_rate_by_tier": {
+      "CRITICAL": {
+        "proxy_rate": 1.0,
+        "windows": 16
+      },
+      "HIGH": {
+        "proxy_rate": 1.0,
+        "windows": 5
+      },
+      "LOW": {
+        "proxy_rate": 0.0,
+        "windows": 19
+      },
+      "MEDIUM": {
+        "proxy_rate": 0.15384615384615385,
+        "windows": 26
+      },
+      "NORMAL": {
+        "proxy_rate": 0.0006337135614702154,
+        "windows": 1578
+      }
+    },
+    "proxy_windows": 26,
+    "roc_auc_of_score_vs_proxy": 0.9984786536084435,
+    "warning": "WEAK PROXY, NOT GROUND TRUTH: the proxy is built from a feature the model uses, so agreement is partly circular and is not accuracy."
+  }
+}

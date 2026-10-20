@@ -1,0 +1,255 @@
+{
+  "baseline_fit": {
+    "entities": 22,
+    "policy": "fitted on training split only (normal-only when labels exist), frozen afterwards",
+    "windows_used": 31
+  },
+  "config": {
+    "dataset": {
+      "log_year": 2015,
+      "name": "loghub",
+      "tz_offset_hours": 0
+    },
+    "evaluation": {
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 0,
+      "ci_level": 0.95,
+      "threshold_strategy": "max_f1"
+    },
+    "features": {
+      "geoip_enabled": false,
+      "min_history_windows": 5,
+      "off_hours_end": 19,
+      "off_hours_start": 8,
+      "success_after_failed_min": 5,
+      "threat_intel_enabled": false,
+      "z_clip": 20.0
+    },
+    "fetch": {
+      "blocklist_url": "https://raw.githubusercontent.com/stamparm/ipsum/master/ipsum.txt",
+      "loghub_url": "https://raw.githubusercontent.com/logpai/loghub/master/OpenSSH/OpenSSH_2k.log",
+      "max_bytes": 200000000,
+      "timeout_seconds": 30
+    },
+    "models": {
+      "iforest": {
+        "max_samples": 256,
+        "n_estimators": 200
+      },
+      "lof": {
+        "n_neighbors": 20
+      },
+      "ocsvm": {
+        "gamma": "scale",
+        "kernel": "rbf",
+        "nu": 0.05
+      },
+      "rule": {
+        "feature": "failed_count"
+      },
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ]
+    },
+    "parser": {
+      "dedupe_exact_lines": false,
+      "failure_methods": [
+        "password",
+        "keyboard-interactive/pam",
+        "keyboard-interactive"
+      ]
+    },
+    "paths": {
+      "dashboard_dir": "reports/dashboard",
+      "db_path": "data/logad.db",
+      "processed_dir": "data/processed",
+      "synthetic_dir": "data/synthetic",
+      "threat_intel_dir": "data/threat_intel"
+    },
+    "preprocessing": {
+      "log1p_features": [
+        "failed_count",
+        "max_failed_burst_60s",
+        "consecutive_failed_max",
+        "distinct_hosts_failed",
+        "event_count",
+        "distinct_event_types",
+        "distinct_src_ips",
+        "new_ip_count",
+        "max_events_per_ip",
+        "distinct_users",
+        "blocklisted_ip_count",
+        "blocklisted_event_count"
+      ]
+    },
+    "real": {
+      "blocklist_path": "data/threat_intel/ipsum.txt",
+      "cross_domain_dataset": "synthetic",
+      "dataset": "loghub",
+      "group_by": "src_ip",
+      "log_path": "data/raw/OpenSSH.log",
+      "manifest_path": "data/threat_intel/manifest.json",
+      "year": 2015
+    },
+    "scoring": {
+      "evidence_top_k": 3,
+      "model_id": "iforest_seed42",
+      "rule_floors": {
+        "R1": "HIGH",
+        "R2": "CRITICAL",
+        "R3": "MEDIUM"
+      },
+      "rules": {
+        "r1": {
+          "enabled": true,
+          "min_distinct_ips": 5,
+          "min_failed": 10
+        },
+        "r2": {
+          "enabled": true
+        },
+        "r3": {
+          "enabled": true,
+          "min_failed": 1
+        }
+      },
+      "tier_min_true_positives": 3,
+      "tier_precision_targets": {
+        "CRITICAL": 0.97,
+        "HIGH": 0.9,
+        "MEDIUM": 0.75
+      }
+    },
+    "split": {
+      "test": 0.2,
+      "train": 0.6,
+      "val": 0.2
+    },
+    "synthetic": {
+      "attacker_blocklisted_fraction": 0.5,
+      "benign_new_ip_prob": 0.02,
+      "days": 14,
+      "host": "bastion01",
+      "incidents_per_type": 12,
+      "n_blocklist_decoys": 200,
+      "n_users": 20,
+      "seed": 42,
+      "start_month_day": "03-03",
+      "typo_prob": 0.05
+    },
+    "threat_intel": {
+      "blocklist_path": "data/threat_intel/blocklist_synthetic.txt",
+      "manifest_path": "data/threat_intel/manifest.json"
+    },
+    "unlabeled": {
+      "proxy_min_failed": 5,
+      "tier_quantiles": {
+        "CRITICAL": 0.995,
+        "HIGH": 0.99,
+        "LOW": 0.95,
+        "MEDIUM": 0.98
+      }
+    },
+    "windowing": {
+      "group_by": "src_ip",
+      "window_seconds": 300
+    }
+  },
+  "dataset": "loghub",
+  "dropped_features": {
+    "blocklisted_event_count": "threat intel disabled or no blocklist snapshot available",
+    "blocklisted_ip_count": "threat intel disabled or no blocklist snapshot available",
+    "distinct_src_ips": "constant 1 when grouping by src_ip",
+    "geo_country_change": "GeoIP data unavailable (deferred)",
+    "max_events_per_ip": "equals event_count when grouping by src_ip"
+  },
+  "features": [
+    "failed_count",
+    "failed_ratio",
+    "max_failed_burst_60s",
+    "consecutive_failed_max",
+    "distinct_hosts_failed",
+    "success_after_failed",
+    "event_count",
+    "event_rate_z",
+    "distinct_event_types",
+    "new_ip_count",
+    "distinct_users",
+    "hour_sin",
+    "hour_cos",
+    "is_off_hours",
+    "is_weekend",
+    "hour_deviation"
+  ],
+  "has_labels": false,
+  "inputs": {
+    "labels": null,
+    "labels_sha256": null,
+    "log": "data/raw/OpenSSH_2k.log",
+    "log_sha256": "1e4912727fa88245113d41b16a0cd25ceadba7f931e1c406542885b91254264f"
+  },
+  "logad_version": "0.1.0",
+  "n_windows": 52,
+  "split": {
+    "cutoffs": {
+      "fractions": {
+        "test": 0.2,
+        "train": 0.6,
+        "val": 0.2
+      },
+      "test_starts_at": "2015-12-10 10:30:00+00:00",
+      "val_starts_at": "2015-12-10 09:20:00+00:00"
+    },
+    "per_split": {
+      "test": {
+        "attack_windows": 0,
+        "end": "2015-12-10 11:00:00+00:00",
+        "low_history_windows": 10,
+        "normal_windows": 0,
+        "start": "2015-12-10 10:30:00+00:00",
+        "unlabeled_windows": 10,
+        "windows": 10
+      },
+      "train": {
+        "attack_windows": 0,
+        "end": "2015-12-10 09:15:00+00:00",
+        "low_history_windows": 31,
+        "normal_windows": 0,
+        "start": "2015-12-10 06:55:00+00:00",
+        "unlabeled_windows": 31,
+        "windows": 31
+      },
+      "val": {
+        "attack_windows": 0,
+        "end": "2015-12-10 10:20:00+00:00",
+        "low_history_windows": 11,
+        "normal_windows": 0,
+        "start": "2015-12-10 09:20:00+00:00",
+        "unlabeled_windows": 11,
+        "windows": 11
+      }
+    }
+  },
+  "threat_intel": {
+    "enabled": false
+  },
+  "warnings": [
+    "constant on the training split (kept, review): ['success_after_failed', 'is_weekend']"
+  ],
+  "window_stats": {
+    "events_total": 1743,
+    "group_by": "src_ip",
+    "unattributed_events": 12,
+    "unattributed_weighted": 12,
+    "window_seconds": 300
+  }
+}

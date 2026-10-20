@@ -1,0 +1,61 @@
+{
+  "dropped": {
+    "distinct_users": "constant 1 when grouping by user",
+    "geo_country_change": "GeoIP data unavailable (deferred)"
+  },
+  "families": {
+    "event_frequency": [
+      "event_count",
+      "event_rate_z",
+      "distinct_event_types"
+    ],
+    "failed_logins": [
+      "failed_count",
+      "failed_ratio",
+      "max_failed_burst_60s",
+      "consecutive_failed_max",
+      "distinct_hosts_failed",
+      "success_after_failed"
+    ],
+    "ip_activity": [
+      "distinct_src_ips",
+      "new_ip_count",
+      "max_events_per_ip"
+    ],
+    "threat_intel": [
+      "blocklisted_ip_count",
+      "blocklisted_event_count"
+    ],
+    "time_patterns": [
+      "hour_sin",
+      "hour_cos",
+      "is_off_hours",
+      "is_weekend",
+      "hour_deviation"
+    ]
+  },
+  "feature_names": [
+    "failed_count",
+    "failed_ratio",
+    "max_failed_burst_60s",
+    "consecutive_failed_max",
+    "distinct_hosts_failed",
+    "success_after_failed",
+    "event_count",
+    "event_rate_z",
+    "distinct_event_types",
+    "distinct_src_ips",
+    "new_ip_count",
+    "max_events_per_ip",
+    "hour_sin",
+    "hour_cos",
+    "is_off_hours",
+    "is_weekend",
+    "hour_deviation",
+    "blocklisted_ip_count",
+    "blocklisted_event_count"
+  ],
+  "group_by": "user",
+  "schema_version": 1,
+  "window_seconds": 300
+}

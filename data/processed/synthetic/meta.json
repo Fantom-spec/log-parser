@@ -1,0 +1,150 @@
+{
+  "baseline_fit": {
+    "entities": 20,
+    "policy": "fitted on training split only (normal-only when labels exist), frozen afterwards",
+    "windows_used": 657
+  },
+  "config": {
+    "dataset": {
+      "log_year": 2025,
+      "name": "synthetic",
+      "tz_offset_hours": 0
+    },
+    "features": {
+      "geoip_enabled": false,
+      "min_history_windows": 5,
+      "off_hours_end": 19,
+      "off_hours_start": 8,
+      "success_after_failed_min": 5,
+      "threat_intel_enabled": true,
+      "z_clip": 20.0
+    },
+    "parser": {
+      "failure_methods": [
+        "password",
+        "keyboard-interactive/pam",
+        "keyboard-interactive"
+      ]
+    },
+    "paths": {
+      "processed_dir": "data/processed",
+      "synthetic_dir": "data/synthetic",
+      "threat_intel_dir": "data/threat_intel"
+    },
+    "split": {
+      "test": 0.2,
+      "train": 0.6,
+      "val": 0.2
+    },
+    "synthetic": {
+      "attacker_blocklisted_fraction": 0.5,
+      "benign_new_ip_prob": 0.02,
+      "days": 14,
+      "host": "bastion01",
+      "incidents_per_type": 12,
+      "n_blocklist_decoys": 200,
+      "n_users": 20,
+      "seed": 42,
+      "start_month_day": "03-03",
+      "typo_prob": 0.05
+    },
+    "threat_intel": {
+      "blocklist_path": "data/threat_intel/blocklist_synthetic.txt",
+      "manifest_path": "data/threat_intel/manifest.json"
+    },
+    "windowing": {
+      "group_by": "user",
+      "window_seconds": 300
+    }
+  },
+  "dataset": "synthetic",
+  "dropped_features": {
+    "distinct_users": "constant 1 when grouping by user",
+    "geo_country_change": "GeoIP data unavailable (deferred)"
+  },
+  "features": [
+    "failed_count",
+    "failed_ratio",
+    "max_failed_burst_60s",
+    "consecutive_failed_max",
+    "distinct_hosts_failed",
+    "success_after_failed",
+    "event_count",
+    "event_rate_z",
+    "distinct_event_types",
+    "distinct_src_ips",
+    "new_ip_count",
+    "max_events_per_ip",
+    "hour_sin",
+    "hour_cos",
+    "is_off_hours",
+    "is_weekend",
+    "hour_deviation",
+    "blocklisted_ip_count",
+    "blocklisted_event_count"
+  ],
+  "has_labels": true,
+  "inputs": {
+    "labels": "/home/claude/ai-log-anomaly-detector/data/synthetic/labels.csv",
+    "labels_sha256": "d9f4a245d707f8e3eca36842f2e9d0d2532171f22deecb569d062a043e742391",
+    "log": "/home/claude/ai-log-anomaly-detector/data/synthetic/auth.log",
+    "log_sha256": "0ee6a8ce088e438561c44ed160c8de1c9123e7e02a6eda9294798d85a4c7924c"
+  },
+  "logad_version": "0.1.0",
+  "n_windows": 1200,
+  "split": {
+    "cutoffs": {
+      "fractions": {
+        "test": 0.2,
+        "train": 0.6,
+        "val": 0.2
+      },
+      "test_starts_at": "2025-03-13 10:45:00+00:00",
+      "val_starts_at": "2025-03-11 09:00:00+00:00"
+    },
+    "per_split": {
+      "test": {
+        "attack_windows": 23,
+        "end": "2025-03-16 21:30:00+00:00",
+        "low_history_windows": 0,
+        "normal_windows": 218,
+        "start": "2025-03-13 10:45:00+00:00",
+        "unlabeled_windows": 0,
+        "windows": 241
+      },
+      "train": {
+        "attack_windows": 63,
+        "end": "2025-03-11 08:55:00+00:00",
+        "low_history_windows": 0,
+        "normal_windows": 657,
+        "start": "2025-03-03 00:30:00+00:00",
+        "unlabeled_windows": 0,
+        "windows": 720
+      },
+      "val": {
+        "attack_windows": 16,
+        "end": "2025-03-13 10:40:00+00:00",
+        "low_history_windows": 0,
+        "normal_windows": 223,
+        "start": "2025-03-11 09:00:00+00:00",
+        "unlabeled_windows": 0,
+        "windows": 239
+      }
+    }
+  },
+  "threat_intel": {
+    "enabled": true,
+    "n_ips": 405,
+    "sha256": "6fdae41a151f860a7c6440d372c9bc029aa198ba5aa6c20a4bad8ff6c03b3635",
+    "source": "/home/claude/ai-log-anomaly-detector/data/threat_intel/blocklist_synthetic.txt",
+    "verified_against_manifest": true
+  },
+  "warnings": [],
+  "window_stats": {
+    "events_total": 6918,
+    "group_by": "user",
+    "unattributed_events": 656,
+    "unattributed_weighted": 656,
+    "window_seconds": 300
+  }
+}

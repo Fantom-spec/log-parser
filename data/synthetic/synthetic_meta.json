@@ -1,0 +1,22 @@
+{
+  "blocklist_ips_total": 405,
+  "days": 14,
+  "files": {
+    "blocklist": "/home/claude/ai-log-anomaly-detector/data/threat_intel/blocklist_synthetic.txt",
+    "labels": "/home/claude/ai-log-anomaly-detector/data/synthetic/labels.csv",
+    "log": "/home/claude/ai-log-anomaly-detector/data/synthetic/auth.log"
+  },
+  "incidents": {
+    "brute_force": 12,
+    "distributed_brute_force": 12,
+    "new_ip_login": 12,
+    "off_hours_login": 12,
+    "success_after_failures": 12
+  },
+  "log_year": 2025,
+  "n_attack_lines": 3710,
+  "n_lines": 7257,
+  "planted_blocklist_ips": 205,
+  "seed": 42,
+  "start": "03-03"
+}

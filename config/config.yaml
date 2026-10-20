@@ -1,0 +1,91 @@
+# Phase 1 configuration. Every value here is recorded in data/processed/<dataset>/meta.json.
+dataset:
+  name: synthetic
+  log_year: 2025          # syslog lines carry no year; rollover Dec->Jan is handled by the parser
+  tz_offset_hours: 0      # local-time offset of the log source vs UTC (UTC = local - offset)
+
+windowing:
+  window_seconds: 300     # tumbling windows
+  group_by: user          # user | src_ip  (use src_ip for attack-heavy logs such as Loghub)
+
+parser:
+  # Only these auth methods count as a LOGIN_FAILED credential failure.
+  failure_methods: [password, keyboard-interactive/pam, keyboard-interactive]
+  # Drop byte-identical lines (same timestamp and text). Off by default: two real identical
+  # events in the same second would be merged. Use it when a file was concatenated/replayed twice.
+  dedupe_exact_lines: false
+
+features:
+  success_after_failed_min: 5   # failures before a success (same window) to set success_after_failed
+  off_hours_start: 8            # local hour; activity in [start, end) is "normal hours"
+  off_hours_end: 19
+  min_history_windows: 5        # fewer training windows than this -> global fallback baseline
+  z_clip: 20.0
+  geoip_enabled: false          # GeoIP is deferred; feature is dropped, not emitted
+  threat_intel_enabled: true    # needs a committed blocklist snapshot; dropped when unavailable
+
+split:
+  train: 0.6
+  val: 0.2
+  test: 0.2
+
+threat_intel:
+  blocklist_path: data/threat_intel/blocklist_synthetic.txt
+  manifest_path: data/threat_intel/manifest.json
+
+synthetic:
+  seed: 42
+  start_month_day: "03-03"      # year comes from dataset.log_year
+  days: 14
+  n_users: 20
+  incidents_per_type: 12
+  typo_prob: 0.05
+  benign_new_ip_prob: 0.02
+  host: bastion01
+  n_blocklist_decoys: 200
+  attacker_blocklisted_fraction: 0.5
+
+preprocessing:
+  # Count-like, heavy-tailed features get log1p before scaling (One-Class SVM / LOF only).
+  log1p_features: [failed_count, max_failed_burst_60s, consecutive_failed_max, distinct_hosts_failed,
+                   event_count, distinct_event_types, distinct_src_ips, new_ip_count,
+                   max_events_per_ip, distinct_users, blocklisted_ip_count, blocklisted_event_count]
+
+models:
+  seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]   # first seed = primary reported model
+  iforest: {n_estimators: 200, max_samples: 256}
+  ocsvm: {kernel: rbf, nu: 0.05, gamma: scale}
+  lof: {n_neighbors: 20}
+  rule: {feature: failed_count}
+
+scoring:
+  model_id: iforest_seed42          # model used for risk tiers / replay scoring (calibrated by calibrate_scoring)
+  # Tier cut-points, rules, rule floors, evidence size and unlabeled-log quantiles live in config/thresholds.yaml.
+
+real:
+  dataset: loghub
+  log_path: data/raw/OpenSSH.log    # Loghub OpenSSH (put the file here or run fetch_loghub)
+  year: 2015                        # ASSUMPTION: syslog has no year; check the dataset documentation and set it
+  group_by: src_ip
+  blocklist_path: data/threat_intel/ipsum.txt
+  manifest_path: data/threat_intel/manifest.json
+  cross_domain_dataset: synthetic   # score the real log with this trained model as a distribution-shift check
+
+fetch:                              # URLs are unverified from the build sandbox (no network there); check them
+  loghub_url: https://raw.githubusercontent.com/logpai/loghub/master/OpenSSH/OpenSSH_2k.log
+  blocklist_url: https://raw.githubusercontent.com/stamparm/ipsum/master/ipsum.txt
+  max_bytes: 200000000
+  timeout_seconds: 30
+
+evaluation:
+  threshold_strategy: max_f1    # threshold maximising F1 on the VALIDATION split
+  bootstrap_samples: 1000
+  bootstrap_seed: 0
+  ci_level: 0.95
+
+paths:
+  synthetic_dir: data/synthetic
+  processed_dir: data/processed
+  threat_intel_dir: data/threat_intel
+  db_path: data/logad.db
+  dashboard_dir: reports/dashboard

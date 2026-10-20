@@ -1,0 +1,478 @@
+{
+  "blocklist_overlap": {
+    "available": false,
+    "reason": "threat_intel features not enabled for this dataset"
+  },
+  "caveats": [
+    "No labels: nothing here measures detection accuracy. Tiers are score quantiles on the validation split.",
+    "Attack-heavy logs make 'normal' hard to define; the model learns whatever dominates the training windows.",
+    "The weak proxy is built from a model input and is only a sanity check.",
+    "Cross-domain scoring with the synthetic-trained model is a distribution-shift demonstration, not an evaluation."
+  ],
+  "cross_domain": {
+    "available": true,
+    "grouping": "user",
+    "limitation": "The model was trained on synthetic normal behaviour grouped by user; a large flagged share mostly reflects domain shift (different users, rates and attack-heavy traffic), not detection accuracy.",
+    "model": "iforest_seed42",
+    "most_shifted_features": [
+      {
+        "feature": "failed_ratio",
+        "real_median": 1.0,
+        "shift_in_robust_units": 9.558224555231773,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "distinct_hosts_failed",
+        "real_median": 1.0,
+        "shift_in_robust_units": 5.684956741580257,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "new_ip_count",
+        "real_median": 1.0,
+        "shift_in_robust_units": 4.380389385252136,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "failed_count",
+        "real_median": 1.0,
+        "shift_in_robust_units": 3.753611656796058,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "max_failed_burst_60s",
+        "real_median": 1.0,
+        "shift_in_robust_units": 3.753611656796058,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "consecutive_failed_max",
+        "real_median": 1.0,
+        "shift_in_robust_units": 3.753611656796058,
+        "synthetic_normal_median": 0.0
+      },
+      {
+        "feature": "max_events_per_ip",
+        "real_median": 2.0,
+        "shift_in_robust_units": 1.554603993578938,
+        "synthetic_normal_median": 1.0
+      },
+      {
+        "feature": "hour_deviation",
+        "real_median": 3.3075216207649376,
+        "shift_in_robust_units": 1.074437465610188,
+        "synthetic_normal_median": 1.698658392
+      }
+    ],
+    "score_quantiles": {
+      "0.5": 0.6708907927889929,
+      "0.9": 0.7682307765124984,
+      "0.99": 0.7909466966684797
+    },
+    "share_flagged": 0.9495798319327731,
+    "tiers": {
+      "CRITICAL": 25,
+      "HIGH": 0,
+      "LOW": 74,
+      "MEDIUM": 14,
+      "NORMAL": 6
+    },
+    "windows": 119
+  },
+  "dataset": "loghub",
+  "group_by": "src_ip",
+  "labels": "none (unlabeled): no precision, recall or F1 are computed",
+  "model_id": "iforest_seed42",
+  "n_windows": 52,
+  "parse": {
+    "coverage_all_lines": 0.999,
+    "coverage_sshd_lines": 0.999,
+    "duplicate_lines_dropped": 0,
+    "event_lines": 1743,
+    "ignored_redundant_lines": 255,
+    "malformed_lines": 0,
+    "not_sshd_lines": 0,
+    "timestamp_regressions": 0,
+    "total_lines": 2000,
+    "unsupported_sshd_lines": 2,
+    "year_rollovers": 0
+  },
+  "rules": {
+    "flagged_by_rule_only": 0,
+    "hits_total": {
+      "R1": 0,
+      "R2": 0,
+      "R3": 0
+    },
+    "unavailable": [
+      "R1 unavailable (missing ['distinct_src_ips'])",
+      "R3 unavailable (missing ['blocklisted_ip_count'])"
+    ]
+  },
+  "score_distribution": {
+    "by_split_median": {
+      "test": 0.5784009140389218,
+      "train": 0.47283966616375483,
+      "val": 0.511815811599503
+    },
+    "histogram": {
+      "counts": [
+        4,
+        0,
+        2,
+        4,
+        3,
+        7,
+        4,
+        8,
+        2,
+        2,
+        2,
+        2,
+        7,
+        0,
+        2,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "edges": [
+        0.39082597915199074,
+        0.405955079969798,
+        0.4210841807876053,
+        0.4362132816054126,
+        0.4513423824232199,
+        0.46647148324102716,
+        0.48160058405883444,
+        0.4967296848766417,
+        0.511858785694449,
+        0.5269878865122563,
+        0.5421169873300635,
+        0.5572460881478708,
+        0.5723751889656781,
+        0.5875042897834855,
+        0.6026333906012926,
+        0.6177624914191,
+        0.6328915922369073,
+        0.6480206930547145,
+        0.6631497938725218,
+        0.6782788946903291,
+        0.6934079955081364
+      ]
+    },
+    "quantiles": {
+      "0.0": 0.39082597915199074,
+      "0.25": 0.46709565612654874,
+      "0.5": 0.5007297254102937,
+      "0.75": 0.5589855680891485,
+      "0.9": 0.581664722554032,
+      "0.95": 0.6393564976022648,
+      "0.99": 0.6846335215018704,
+      "0.999": 0.6925305481075097,
+      "1.0": 0.6934079955081364
+    }
+  },
+  "tier_basis": "UNLABELED: tiers are score quantiles, meaning unusual for this log, not attack probability",
+  "tier_thresholds": {
+    "CRITICAL": 0.581664722554032,
+    "HIGH": 0.581664722554032,
+    "LOW": 0.581664722554032,
+    "MEDIUM": 0.581664722554032
+  },
+  "tiers": {
+    "all": {
+      "CRITICAL": 10,
+      "HIGH": 0,
+      "LOW": 0,
+      "MEDIUM": 0,
+      "NORMAL": 42
+    },
+    "test": {
+      "CRITICAL": 5,
+      "HIGH": 0,
+      "LOW": 0,
+      "MEDIUM": 0,
+      "NORMAL": 5
+    },
+    "train": {
+      "CRITICAL": 3,
+      "HIGH": 0,
+      "LOW": 0,
+      "MEDIUM": 0,
+      "NORMAL": 28
+    },
+    "val": {
+      "CRITICAL": 2,
+      "HIGH": 0,
+      "LOW": 0,
+      "MEDIUM": 0,
+      "NORMAL": 9
+    }
+  },
+  "top_windows": [
+    {
+      "entity": "187.141.143.180",
+      "evidence": [
+        "event_count=244 (typical 5, +4.9 robust deviations)",
+        "distinct_users=27 (typical 1, +4.7 robust deviations)",
+        "failed_count=54 (typical 1, +4.5 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6934,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 09:15:00+00:00"
+    },
+    {
+      "entity": "183.62.140.253",
+      "evidence": [
+        "failed_count=141 (typical 1, +11.9 robust deviations)",
+        "consecutive_failed_max=141 (typical 1, +11.9 robust deviations)",
+        "event_count=430 (typical 5, +8.7 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6762,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 10:55:00+00:00"
+    },
+    {
+      "entity": "183.62.140.253",
+      "evidence": [
+        "failed_count=129 (typical 1, +10.9 robust deviations)",
+        "consecutive_failed_max=129 (typical 1, +10.9 robust deviations)",
+        "event_count=386 (typical 5, +7.8 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6748,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 11:00:00+00:00"
+    },
+    {
+      "entity": "112.95.230.3",
+      "evidence": [
+        "max_failed_burst_60s=26 (typical 1, +4.0 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6103,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 07:25:00+00:00"
+    },
+    {
+      "entity": "103.99.0.122",
+      "evidence": [
+        "max_failed_burst_60s=22 (typical 1, +3.3 robust deviations)",
+        "distinct_users=19 (typical 1, +3.2 robust deviations)",
+        "event_rate_z=18.2113 (typical 0, +3.2 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.6069,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 09:10:00+00:00"
+    },
+    {
+      "entity": "119.137.62.142",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5817,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 09:45:00+00:00"
+    },
+    {
+      "entity": "1.237.174.253",
+      "evidence": [
+        "hour_sin=0.382683 (typical 0.854912, -4.2 robust deviations)",
+        "hour_deviation=2.39007 (typical 0.556735, +3.4 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.5817,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 10:30:00+00:00"
+    },
+    {
+      "entity": "1.237.174.253",
+      "evidence": [
+        "hour_sin=0.442289 (typical 0.854912, -3.7 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.5817,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 10:15:00+00:00"
+    },
+    {
+      "entity": "88.147.143.242",
+      "evidence": [
+        "hour_sin=0.321439 (typical 0.854912, -4.8 robust deviations)",
+        "hour_deviation=2.64007 (typical 0.556735, +3.9 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.5817,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 10:45:00+00:00"
+    },
+    {
+      "entity": "1.237.174.253",
+      "evidence": [
+        "hour_sin=0.300706 (typical 0.854912, -5.0 robust deviations)",
+        "hour_deviation=2.7234 (typical 0.556735, +4.0 robust deviations)"
+      ],
+      "rules": [],
+      "score": 0.5817,
+      "tier": "CRITICAL",
+      "window_start": "2015-12-10 10:50:00+00:00"
+    },
+    {
+      "entity": "119.137.62.142",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5789,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:30:00+00:00"
+    },
+    {
+      "entity": "103.99.0.122",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5751,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 11:00:00+00:00"
+    },
+    {
+      "entity": "188.132.244.89",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5609,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:00:00+00:00"
+    },
+    {
+      "entity": "5.188.10.180",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5583,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 08:25:00+00:00"
+    },
+    {
+      "entity": "181.214.87.4",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5532,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:45:00+00:00"
+    },
+    {
+      "entity": "187.141.143.180",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5473,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:10:00+00:00"
+    },
+    {
+      "entity": "183.62.140.253",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5416,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 10:50:00+00:00"
+    },
+    {
+      "entity": "212.47.254.145",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5386,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 07:00:00+00:00"
+    },
+    {
+      "entity": "194.190.163.22",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5219,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 08:05:00+00:00"
+    },
+    {
+      "entity": "185.190.58.151",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5144,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:10:00+00:00"
+    },
+    {
+      "entity": "52.80.34.196",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5118,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:30:00+00:00"
+    },
+    {
+      "entity": "52.80.34.196",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5118,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 10:20:00+00:00"
+    },
+    {
+      "entity": "187.141.143.180",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5032,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 09:20:00+00:00"
+    },
+    {
+      "entity": "194.190.163.22",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5024,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 07:50:00+00:00"
+    },
+    {
+      "entity": "194.190.163.22",
+      "evidence": [],
+      "rules": [],
+      "score": 0.5022,
+      "tier": "NORMAL",
+      "window_start": "2015-12-10 08:30:00+00:00"
+    }
+  ],
+  "unattributed_events": 12,
+  "unsupported_top_patterns": {
+    "Failed password for invalid user  # from <ip> port # ssh#": 1,
+    "fatal: Write failed: Connection reset by peer [preauth]": 1
+  },
+  "weak_proxy": {
+    "definition": "window has at least 5 failed logins",
+    "proxy_rate_by_tier": {
+      "CRITICAL": {
+        "proxy_rate": 0.5,
+        "windows": 10
+      },
+      "HIGH": {
+        "proxy_rate": null,
+        "windows": 0
+      },
+      "LOW": {
+        "proxy_rate": null,
+        "windows": 0
+      },
+      "MEDIUM": {
+        "proxy_rate": null,
+        "windows": 0
+      },
+      "NORMAL": {
+        "proxy_rate": 0.23809523809523808,
+        "windows": 42
+      }
+    },
+    "proxy_windows": 15,
+    "roc_auc_of_score_vs_proxy": 0.7351351351351352,
+    "warning": "WEAK PROXY, NOT GROUND TRUTH: the proxy is built from a feature the model uses, so agreement is partly circular and is not accuracy."
+  }
+}

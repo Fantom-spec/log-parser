@@ -1,0 +1,7 @@
+{
+  "iforest_seed42": {
+    "quantile": 0.95,
+    "strategy": "validation_score_quantile",
+    "threshold": 0.581664722554032
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "dropped": {
+    "blocklisted_event_count": "threat intel disabled or no blocklist snapshot available",
+    "blocklisted_ip_count": "threat intel disabled or no blocklist snapshot available",
+    "distinct_src_ips": "constant 1 when grouping by src_ip",
+    "geo_country_change": "GeoIP data unavailable (deferred)",
+    "max_events_per_ip": "equals event_count when grouping by src_ip"
+  },
+  "families": {
+    "event_frequency": [
+      "event_count",
+      "event_rate_z",
+      "distinct_event_types"
+    ],
+    "failed_logins": [
+      "failed_count",
+      "failed_ratio",
+      "max_failed_burst_60s",
+      "consecutive_failed_max",
+      "distinct_hosts_failed",
+      "success_after_failed"
+    ],
+    "ip_activity": [
+      "new_ip_count",
+      "distinct_users"
+    ],
+    "time_patterns": [
+      "hour_sin",
+      "hour_cos",
+      "is_off_hours",
+      "is_weekend",
+      "hour_deviation"
+    ]
+  },
+  "feature_names": [
+    "failed_count",
+    "failed_ratio",
+    "max_failed_burst_60s",
+    "consecutive_failed_max",
+    "distinct_hosts_failed",
+    "success_after_failed",
+    "event_count",
+    "event_rate_z",
+    "distinct_event_types",
+    "new_ip_count",
+    "distinct_users",
+    "hour_sin",
+    "hour_cos",
+    "is_off_hours",
+    "is_weekend",
+    "hour_deviation"
+  ],
+  "group_by": "src_ip",
+  "schema_version": 1,
+  "window_seconds": 300
+}

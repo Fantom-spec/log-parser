@@ -1,0 +1,13 @@
+[project]
+name = "logad"
+version = "0.1.0"
+description = "Unsupervised SSH login anomaly detection (course project)"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pandas", "pyyaml", "scikit-learn", "matplotlib", "joblib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]

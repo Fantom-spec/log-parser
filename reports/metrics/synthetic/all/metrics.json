@@ -1,0 +1,421 @@
+{
+  "caveats": [
+    "Thresholds were calibrated on the validation split (labels used there, documented); test labels were used only for these metrics.",
+    "Bootstrap intervals resample windows independently although an incident spans several windows, so they are optimistic.",
+    "Scores from different models are not comparable; each model has its own threshold and operating point.",
+    "Single chronological split; results depend on which incidents fall in the test period.",
+    "Synthetic data: attacker IPs are partly planted in the blocklist, so threat_intel features are circular here; attack patterns are generator-defined, not real traffic."
+  ],
+  "class_balance": {
+    "test": {
+      "attack": 23,
+      "normal": 218,
+      "windows": 241
+    },
+    "train": {
+      "attack": 63,
+      "normal": 657,
+      "windows": 720
+    },
+    "val": {
+      "attack": 16,
+      "normal": 223,
+      "windows": 239
+    }
+  },
+  "dataset": "synthetic",
+  "features": [
+    "failed_count",
+    "failed_ratio",
+    "max_failed_burst_60s",
+    "consecutive_failed_max",
+    "distinct_hosts_failed",
+    "success_after_failed",
+    "event_count",
+    "event_rate_z",
+    "distinct_event_types",
+    "distinct_src_ips",
+    "new_ip_count",
+    "max_events_per_ip",
+    "hour_sin",
+    "hour_cos",
+    "is_off_hours",
+    "is_weekend",
+    "hour_deviation",
+    "blocklisted_ip_count",
+    "blocklisted_event_count"
+  ],
+  "iforest_seed_stats": {
+    "alerts_per_day": {
+      "mean": 10.401609657947684,
+      "std": 1.9529602502182655
+    },
+    "f1": {
+      "mean": 0.6251711240745964,
+      "std": 0.018730912821372115
+    },
+    "false_positive_rate": {
+      "mean": 0.08027522935779816,
+      "std": 0.021865978052102587
+    },
+    "n_alerts": {
+      "mean": 35.9,
+      "std": 6.740425308044985
+    },
+    "n_seeds": 10,
+    "pr_auc": {
+      "mean": 0.7894556788088228,
+      "std": 0.004474119325180494
+    },
+    "precision": {
+      "mean": 0.5196200896839354,
+      "std": 0.04576430100437846
+    },
+    "recall": {
+      "mean": 0.8,
+      "std": 0.08980830947727345
+    }
+  },
+  "model_ids_all": [
+    "iforest_seed42",
+    "iforest_seed43",
+    "iforest_seed44",
+    "iforest_seed45",
+    "iforest_seed46",
+    "iforest_seed47",
+    "iforest_seed48",
+    "iforest_seed49",
+    "iforest_seed50",
+    "iforest_seed51",
+    "lof",
+    "ocsvm",
+    "rule"
+  ],
+  "models": {
+    "iforest": {
+      "bootstrap_ci": {
+        "f1": {
+          "high": 0.7466666666666666,
+          "low": 0.48134920634920647
+        },
+        "level": 0.95,
+        "n_resamples_used": 1000,
+        "pr_auc": {
+          "high": 0.9039704306823575,
+          "low": 0.6309343822843823
+        },
+        "precision": {
+          "high": 0.6046664626682986,
+          "low": 0.3242350841407446
+        },
+        "recall": {
+          "high": 1.0,
+          "low": 0.8460526315789475
+        }
+      },
+      "metrics": {
+        "alerts_per_day": 13.617706237424548,
+        "f1": 0.6285714285714286,
+        "false_positive_rate": 0.11467889908256881,
+        "fn": 1,
+        "fp": 25,
+        "n_alerts": 47,
+        "n_attack": 23,
+        "n_windows": 241,
+        "pr_auc": 0.7879362125803209,
+        "precision": 0.46808510638297873,
+        "prevalence": 0.0954356846473029,
+        "recall": 0.9565217391304348,
+        "roc_auc": 0.961906661348225,
+        "threshold": 0.5785688327660996,
+        "tn": 193,
+        "tp": 22
+      },
+      "model_id": "iforest_seed42",
+      "per_scenario_recall": {
+        "brute_force": {
+          "n_windows": 3,
+          "recall": 1.0
+        },
+        "distributed_brute_force": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "new_ip_login": {
+          "n_windows": 6,
+          "recall": 0.8333333333333334
+        },
+        "off_hours_login": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "success_after_failures": {
+          "n_windows": 6,
+          "recall": 1.0
+        }
+      },
+      "version": "a6fed65d4f"
+    },
+    "lof": {
+      "bootstrap_ci": {
+        "f1": {
+          "high": 0.6666666666666666,
+          "low": 0.3829280648429585
+        },
+        "level": 0.95,
+        "n_resamples_used": 1000,
+        "pr_auc": {
+          "high": 0.8075505195389417,
+          "low": 0.44712134536958253
+        },
+        "precision": {
+          "high": 0.5625400641025641,
+          "low": 0.2777777777777778
+        },
+        "recall": {
+          "high": 0.9166666666666666,
+          "low": 0.5483137829912024
+        }
+      },
+      "metrics": {
+        "alerts_per_day": 11.879275653923541,
+        "f1": 0.53125,
+        "false_positive_rate": 0.11009174311926606,
+        "fn": 6,
+        "fp": 24,
+        "n_alerts": 41,
+        "n_attack": 23,
+        "n_windows": 241,
+        "pr_auc": 0.6396535302683833,
+        "precision": 0.4146341463414634,
+        "prevalence": 0.0954356846473029,
+        "recall": 0.7391304347826086,
+        "roc_auc": 0.8705624252094136,
+        "threshold": 1.6126513028707261,
+        "tn": 194,
+        "tp": 17
+      },
+      "model_id": "lof",
+      "per_scenario_recall": {
+        "brute_force": {
+          "n_windows": 3,
+          "recall": 1.0
+        },
+        "distributed_brute_force": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "new_ip_login": {
+          "n_windows": 6,
+          "recall": 0.5
+        },
+        "off_hours_login": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "success_after_failures": {
+          "n_windows": 6,
+          "recall": 0.5
+        }
+      },
+      "version": "d4d5044b8c"
+    },
+    "ocsvm": {
+      "bootstrap_ci": {
+        "f1": {
+          "high": 0.8749999999999999,
+          "low": 0.6045348837209303
+        },
+        "level": 0.95,
+        "n_resamples_used": 1000,
+        "pr_auc": {
+          "high": 0.9570020054455649,
+          "low": 0.7520877231683512
+        },
+        "precision": {
+          "high": 0.863784584980237,
+          "low": 0.5262531328320802
+        },
+        "recall": {
+          "high": 0.9615384615384616,
+          "low": 0.6551392572944297
+        }
+      },
+      "metrics": {
+        "alerts_per_day": 7.822937625754527,
+        "f1": 0.76,
+        "false_positive_rate": 0.03669724770642202,
+        "fn": 4,
+        "fp": 8,
+        "n_alerts": 27,
+        "n_attack": 23,
+        "n_windows": 241,
+        "pr_auc": 0.8685952406838462,
+        "precision": 0.7037037037037037,
+        "prevalence": 0.0954356846473029,
+        "recall": 0.8260869565217391,
+        "roc_auc": 0.9794575189469485,
+        "threshold": 0.8637007604294458,
+        "tn": 210,
+        "tp": 19
+      },
+      "model_id": "ocsvm",
+      "per_scenario_recall": {
+        "brute_force": {
+          "n_windows": 3,
+          "recall": 1.0
+        },
+        "distributed_brute_force": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "new_ip_login": {
+          "n_windows": 6,
+          "recall": 0.6666666666666666
+        },
+        "off_hours_login": {
+          "n_windows": 4,
+          "recall": 0.5
+        },
+        "success_after_failures": {
+          "n_windows": 6,
+          "recall": 1.0
+        }
+      },
+      "version": "113cbb52ae"
+    },
+    "rule": {
+      "bootstrap_ci": {
+        "f1": {
+          "high": 0.787878787878788,
+          "low": 0.3636363636363636
+        },
+        "level": 0.95,
+        "n_resamples_used": 1000,
+        "pr_auc": {
+          "high": 0.7333305654708212,
+          "low": 0.3536285907211738
+        },
+        "precision": {
+          "high": 1.0,
+          "low": 1.0
+        },
+        "recall": {
+          "high": 0.65,
+          "low": 0.2222222222222222
+        }
+      },
+      "metrics": {
+        "alerts_per_day": 2.89738430583501,
+        "f1": 0.6060606060606061,
+        "false_positive_rate": 0.0,
+        "fn": 13,
+        "fp": 0,
+        "n_alerts": 10,
+        "n_attack": 23,
+        "n_windows": 241,
+        "pr_auc": 0.5496267682609756,
+        "precision": 1.0,
+        "prevalence": 0.0954356846473029,
+        "recall": 0.43478260869565216,
+        "roc_auc": 0.7664539289988033,
+        "threshold": 5.0,
+        "tn": 218,
+        "tp": 10
+      },
+      "model_id": "rule",
+      "per_scenario_recall": {
+        "brute_force": {
+          "n_windows": 3,
+          "recall": 1.0
+        },
+        "distributed_brute_force": {
+          "n_windows": 4,
+          "recall": 1.0
+        },
+        "new_ip_login": {
+          "n_windows": 6,
+          "recall": 0.0
+        },
+        "off_hours_login": {
+          "n_windows": 4,
+          "recall": 0.0
+        },
+        "success_after_failures": {
+          "n_windows": 6,
+          "recall": 0.5
+        }
+      },
+      "version": "655d037e5e"
+    }
+  },
+  "tag": "all",
+  "test_window_span_days": 3.451388888888889,
+  "thresholds": {
+    "iforest_seed42": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.5785688327660996,
+      "val_f1_at_threshold": 0.7441860465116279
+    },
+    "iforest_seed43": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.6400507492144218,
+      "val_f1_at_threshold": 0.7567567567567567
+    },
+    "iforest_seed44": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.6570627159465938,
+      "val_f1_at_threshold": 0.7272727272727272
+    },
+    "iforest_seed45": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.61813143210729,
+      "val_f1_at_threshold": 0.7567567567567567
+    },
+    "iforest_seed46": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.658674581605787,
+      "val_f1_at_threshold": 0.7272727272727272
+    },
+    "iforest_seed47": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.6594315957933027,
+      "val_f1_at_threshold": 0.7272727272727272
+    },
+    "iforest_seed48": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.5913454172935354,
+      "val_f1_at_threshold": 0.7441860465116279
+    },
+    "iforest_seed49": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.6228745615078779,
+      "val_f1_at_threshold": 0.7368421052631579
+    },
+    "iforest_seed50": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.6679714453524535,
+      "val_f1_at_threshold": 0.7741935483870969
+    },
+    "iforest_seed51": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.5894037343059051,
+      "val_f1_at_threshold": 0.761904761904762
+    },
+    "lof": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 1.6126513028707261,
+      "val_f1_at_threshold": 0.6
+    },
+    "ocsvm": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 0.8637007604294458,
+      "val_f1_at_threshold": 0.875
+    },
+    "rule": {
+      "strategy": "max_f1_on_validation",
+      "threshold": 5.0,
+      "val_f1_at_threshold": 0.5454545454545454
+    }
+  }
+}

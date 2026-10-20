@@ -1,0 +1,115 @@
+{
+  "evidence_top_k": 3,
+  "model_id": "iforest_seed42",
+  "model_version": "a8a813f96d",
+  "note": "UNLABELED: tiers are score quantiles, meaning unusual for this log, not attack probability",
+  "profile": {
+    "consecutive_failed_max": {
+      "median": 0.0,
+      "scale": 6.307148851987717
+    },
+    "distinct_event_types": {
+      "median": 1.0,
+      "scale": 0.5774025266813899
+    },
+    "distinct_hosts_failed": {
+      "median": 0.0,
+      "scale": 0.47464503042596357
+    },
+    "distinct_users": {
+      "median": 1.0,
+      "scale": 0.1
+    },
+    "event_count": {
+      "median": 2.0,
+      "scale": 12.48531944066682
+    },
+    "event_rate_z": {
+      "median": 0.0,
+      "scale": 2.090670460860221
+    },
+    "failed_count": {
+      "median": 0.0,
+      "scale": 6.307148851987717
+    },
+    "failed_ratio": {
+      "median": 0.0,
+      "scale": 0.4644382747583904
+    },
+    "hour_cos": {
+      "median": -0.7372773368,
+      "scale": 0.5940186236286029
+    },
+    "hour_deviation": {
+      "median": 1.8516663809999998,
+      "scale": 2.5719291055240947
+    },
+    "hour_sin": {
+      "median": -0.4617486132,
+      "scale": 0.6486803890012109
+    },
+    "is_off_hours": {
+      "median": 0.0,
+      "scale": 0.3372161386876645
+    },
+    "is_weekend": {
+      "median": 0.0,
+      "scale": 0.3416043726179134
+    },
+    "max_failed_burst_60s": {
+      "median": 0.0,
+      "scale": 3.174915394161127
+    },
+    "new_ip_count": {
+      "median": 0.0,
+      "scale": 0.459660354595299
+    },
+    "success_after_failed": {
+      "median": 0.0,
+      "scale": 0.1
+    }
+  },
+  "rule_floors": {
+    "R1": "HIGH",
+    "R2": "CRITICAL",
+    "R3": "MEDIUM"
+  },
+  "rules": {
+    "r1": {
+      "enabled": true,
+      "min_distinct_ips": 5,
+      "min_failed": 10
+    },
+    "r2": {
+      "enabled": true
+    },
+    "r3": {
+      "enabled": true,
+      "min_failed": 1
+    }
+  },
+  "tier_calibration": {
+    "CRITICAL": {
+      "basis": "validation score distribution (unlabeled)",
+      "quantile": 0.995
+    },
+    "HIGH": {
+      "basis": "validation score distribution (unlabeled)",
+      "quantile": 0.99
+    },
+    "LOW": {
+      "basis": "validation score distribution (unlabeled)",
+      "quantile": 0.95
+    },
+    "MEDIUM": {
+      "basis": "validation score distribution (unlabeled)",
+      "quantile": 0.98
+    }
+  },
+  "tier_thresholds": {
+    "CRITICAL": 0.7566052935924932,
+    "HIGH": 0.7251773864909599,
+    "LOW": 0.6058571974711402,
+    "MEDIUM": 0.6229621436851466
+  }
+}

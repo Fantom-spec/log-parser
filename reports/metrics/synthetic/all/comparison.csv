@@ -1,0 +1,6 @@
+model,model_id,threshold,precision,recall,f1,pr_auc,roc_auc,false_positive_rate,alerts_per_day,tp,fp,fn,tn,prevalence
+Rule (failed_count),rule,5,1,0.434783,0.606061,0.549627,0.766454,0,2.89738,10,0,13,218,0.0954357
+Isolation Forest,iforest_seed42,0.578569,0.468085,0.956522,0.628571,0.787936,0.961907,0.114679,13.6177,22,25,1,193,0.0954357
+One-Class SVM,ocsvm,0.863701,0.703704,0.826087,0.76,0.868595,0.979458,0.0366972,7.82294,19,8,4,210,0.0954357
+Local Outlier Factor,lof,1.61265,0.414634,0.73913,0.53125,0.639654,0.870562,0.110092,11.8793,17,24,6,194,0.0954357
+Isolation Forest (mean over 10 seeds),iforest_mean,,0.51962,0.8,0.625171,0.789456,,0.0802752,10.4016,,,,,

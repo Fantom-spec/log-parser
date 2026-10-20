@@ -1,0 +1,43 @@
+{
+  "models": {
+    "iforest_seed42": {
+      "family": "iforest",
+      "features": [
+        "failed_count",
+        "failed_ratio",
+        "max_failed_burst_60s",
+        "consecutive_failed_max",
+        "distinct_hosts_failed",
+        "success_after_failed",
+        "event_count",
+        "event_rate_z",
+        "distinct_event_types",
+        "new_ip_count",
+        "distinct_users",
+        "hour_sin",
+        "hour_cos",
+        "is_off_hours",
+        "is_weekend",
+        "hour_deviation"
+      ],
+      "fit_data_sha256": "1dd8799988baddb2c247ac46f240c25f43836ee53e54e1697526a0997d8543e0",
+      "input_kind": "raw",
+      "log1p_features": [],
+      "model_id": "iforest_seed42",
+      "params": {
+        "max_samples": 256,
+        "n_estimators": 200,
+        "random_state": 42
+      },
+      "seed": 42,
+      "sklearn_version": "1.8.0",
+      "tag": "unlabeled",
+      "threshold": 0.6058571974711402,
+      "threshold_strategy": "validation_score_quantile",
+      "train_rows": 986,
+      "val_metrics": null,
+      "val_rows": 329,
+      "version": "a8a813f96d"
+    }
+  }
+}

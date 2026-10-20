@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "date": "synthetic",
+      "file": "blocklist_synthetic.txt",
+      "note": "Attacker IPs are partly planted here: threat_intel results on synthetic data are circular.",
+      "seed": 42,
+      "sha256": "6fdae41a151f860a7c6440d372c9bc029aa198ba5aa6c20a4bad8ff6c03b3635",
+      "source": "synthetic (planted by generator)",
+      "url": null
+    }
+  ]
+}

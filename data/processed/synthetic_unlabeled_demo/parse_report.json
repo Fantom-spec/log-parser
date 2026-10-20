@@ -1,0 +1,30 @@
+{
+  "blank_lines": 0,
+  "coverage_all_lines": 0.953286,
+  "coverage_sshd_lines": 1.0,
+  "duplicate_lines_dropped": 0,
+  "event_lines": 6918,
+  "events_by_type": {
+    "DISCONNECT": 1312,
+    "LOGIN_FAILED": 1819,
+    "LOGIN_SUCCESS": 656,
+    "PAM_AUTH_FAILURE": 1819,
+    "SESSION_CLOSED": 656,
+    "SESSION_OPENED": 656
+  },
+  "ignored_redundant_by_reason": {},
+  "ignored_redundant_lines": 0,
+  "invalid_timestamp_lines": 0,
+  "malformed_lines": 3,
+  "malformed_samples": [
+    "@@ corrupted syslog fragment ##",
+    "@@ corrupted syslog fragment ##",
+    "@@ corrupted syslog fragment ##"
+  ],
+  "not_sshd_lines": 336,
+  "timestamp_regressions": 0,
+  "total_lines": 7257,
+  "unsupported_sshd_lines": 0,
+  "unsupported_top_patterns": {},
+  "year_rollovers": 0
+}

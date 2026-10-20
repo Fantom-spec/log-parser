@@ -1,0 +1,134 @@
+{
+  "evidence_top_k": 3,
+  "model_id": "iforest_seed42",
+  "model_version": "a6fed65d4f",
+  "note": "tiers are validation-precision bands; evidence lists feature deviations, not causal attribution",
+  "profile": {
+    "blocklisted_event_count": {
+      "median": 0.0,
+      "scale": 0.1
+    },
+    "blocklisted_ip_count": {
+      "median": 0.0,
+      "scale": 0.1
+    },
+    "consecutive_failed_max": {
+      "median": 0.0,
+      "scale": 0.2664100848550653
+    },
+    "distinct_event_types": {
+      "median": 2.0,
+      "scale": 0.7033742288208112
+    },
+    "distinct_hosts_failed": {
+      "median": 0.0,
+      "scale": 0.1759028336461938
+    },
+    "distinct_src_ips": {
+      "median": 1.0,
+      "scale": 0.1
+    },
+    "event_count": {
+      "median": 2.0,
+      "scale": 0.9240456851609836
+    },
+    "event_rate_z": {
+      "median": 0.0,
+      "scale": 0.9240456851609836
+    },
+    "failed_count": {
+      "median": 0.0,
+      "scale": 0.2664100848550653
+    },
+    "failed_ratio": {
+      "median": 0.0,
+      "scale": 0.10462194042644057
+    },
+    "hour_cos": {
+      "median": -0.8191520443,
+      "scale": 0.3210919601910567
+    },
+    "hour_deviation": {
+      "median": 1.698658392,
+      "scale": 1.4974005284255811
+    },
+    "hour_sin": {
+      "median": -0.1088668749,
+      "scale": 0.8171432408172599
+    },
+    "is_off_hours": {
+      "median": 0.0,
+      "scale": 0.14936463227211075
+    },
+    "is_weekend": {
+      "median": 0.0,
+      "scale": 0.22757873597035821
+    },
+    "max_events_per_ip": {
+      "median": 1.0,
+      "scale": 0.6432506311127156
+    },
+    "max_failed_burst_60s": {
+      "median": 0.0,
+      "scale": 0.2664100848550653
+    },
+    "new_ip_count": {
+      "median": 0.0,
+      "scale": 0.22829020711418782
+    },
+    "success_after_failed": {
+      "median": 0.0,
+      "scale": 0.1
+    }
+  },
+  "rule_floors": {
+    "R1": "HIGH",
+    "R2": "CRITICAL",
+    "R3": "MEDIUM"
+  },
+  "rules": {
+    "r1": {
+      "enabled": true,
+      "min_distinct_ips": 5,
+      "min_failed": 10
+    },
+    "r2": {
+      "enabled": true
+    },
+    "r3": {
+      "enabled": true,
+      "min_failed": 1
+    }
+  },
+  "tier_calibration": {
+    "CRITICAL": {
+      "merged_with": "HIGH",
+      "reachable": true,
+      "target_precision": 0.97,
+      "validation_precision": 1.0,
+      "validation_true_positives": 7
+    },
+    "HIGH": {
+      "reachable": true,
+      "target_precision": 0.9,
+      "validation_precision": 1.0,
+      "validation_true_positives": 7
+    },
+    "LOW": {
+      "validation_precision": 0.5925925925925926,
+      "validation_true_positives": 16
+    },
+    "MEDIUM": {
+      "reachable": true,
+      "target_precision": 0.75,
+      "validation_precision": 0.7777777777777778,
+      "validation_true_positives": 7
+    }
+  },
+  "tier_thresholds": {
+    "CRITICAL": 0.7426666345398739,
+    "HIGH": 0.7426666345398739,
+    "LOW": 0.5785688327660996,
+    "MEDIUM": 0.7078629393208716
+  }
+}

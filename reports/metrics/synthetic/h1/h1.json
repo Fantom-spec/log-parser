@@ -1,0 +1,531 @@
+{
+  "caveats": [
+    "Only baseline-dependent features differ between the two arms; windows, split, models and seeds are identical.",
+    "Same decision rule for every model: supported only if the paired PR-AUC delta CI is above 0.",
+    "Bootstrap resamples windows independently although incidents span several windows: intervals are optimistic.",
+    "The test split has 23 attack windows; 0 test windows are low-history in the per-user arm.",
+    "Synthetic users are generated with individual home IPs and active hours, which favours per-user baselines by construction; real users may be less distinct."
+  ],
+  "dataset": "synthetic",
+  "features_that_differ": [
+    "hour_deviation"
+  ],
+  "hypothesis": "per-user baselines improve detection over a global baseline",
+  "models": {
+    "iforest": {
+      "by_history": {
+        "global": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.0871559633027523,
+            "recall": 0.8695652173913043,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        },
+        "per_user": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.11467889908256881,
+            "recall": 0.9565217391304348,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        }
+      },
+      "delta": {
+        "delta_f1": -0.01658986175115207,
+        "delta_f1_ci": [
+          -0.08743579943946035,
+          0.05953400195694716
+        ],
+        "delta_f1_distinguishable": false,
+        "delta_pr_auc": 0.0120961834227864,
+        "delta_pr_auc_ci": [
+          -0.002288678276490931,
+          0.033268806082963086
+        ],
+        "delta_pr_auc_distinguishable": false,
+        "n_resamples_used": 1000,
+        "seed_paired": {
+          "delta_f1_mean": -0.007697522043793303,
+          "delta_f1_std": 0.021745544319080722,
+          "delta_pr_auc_mean": 0.010414545493234484,
+          "delta_pr_auc_std": 0.0039574330895078185,
+          "n_seeds": 10
+        },
+        "verdict_pr_auc": "inconclusive"
+      },
+      "global": {
+        "f1": 0.6451612903225806,
+        "false_positive_rate": 0.0871559633027523,
+        "pr_auc": 0.7758400291575345,
+        "precision": 0.5128205128205128,
+        "recall": 0.8695652173913043,
+        "seed_stats": {
+          "alerts_per_day": {
+            "mean": 10.546478873239437,
+            "std": 0.9868135358927167
+          },
+          "f1": {
+            "mean": 0.6328686461183898,
+            "std": 0.016842265513555322
+          },
+          "false_positive_rate": {
+            "mean": 0.08073394495412844,
+            "std": 0.010637631272737669
+          },
+          "n_alerts": {
+            "mean": 36.4,
+            "std": 3.40587727318528
+          },
+          "n_seeds": 10,
+          "pr_auc": {
+            "mean": 0.7790411333155883,
+            "std": 0.00438800954637863
+          },
+          "precision": {
+            "mean": 0.5179549540381677,
+            "std": 0.02184803310984245
+          },
+          "recall": {
+            "mean": 0.8173913043478261,
+            "std": 0.053446634535031214
+          }
+        }
+      },
+      "per_scenario_recall": {
+        "global": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.5
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 1.0
+          }
+        },
+        "per_user": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.8333333333333334
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 1.0
+          }
+        }
+      },
+      "per_user": {
+        "f1": 0.6285714285714286,
+        "false_positive_rate": 0.11467889908256881,
+        "pr_auc": 0.7879362125803209,
+        "precision": 0.46808510638297873,
+        "recall": 0.9565217391304348,
+        "seed_stats": {
+          "alerts_per_day": {
+            "mean": 10.401609657947684,
+            "std": 1.9529602502182655
+          },
+          "f1": {
+            "mean": 0.6251711240745964,
+            "std": 0.018730912821372115
+          },
+          "false_positive_rate": {
+            "mean": 0.08027522935779816,
+            "std": 0.021865978052102587
+          },
+          "n_alerts": {
+            "mean": 35.9,
+            "std": 6.740425308044985
+          },
+          "n_seeds": 10,
+          "pr_auc": {
+            "mean": 0.7894556788088228,
+            "std": 0.004474119325180494
+          },
+          "precision": {
+            "mean": 0.5196200896839354,
+            "std": 0.04576430100437846
+          },
+          "recall": {
+            "mean": 0.8,
+            "std": 0.08980830947727345
+          }
+        }
+      }
+    },
+    "lof": {
+      "by_history": {
+        "global": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.10091743119266056,
+            "recall": 0.782608695652174,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        },
+        "per_user": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.11009174311926606,
+            "recall": 0.7391304347826086,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        }
+      },
+      "delta": {
+        "delta_f1": -0.0401785714285714,
+        "delta_f1_ci": [
+          -0.1084812910993794,
+          0.021132251321448112
+        ],
+        "delta_f1_distinguishable": false,
+        "delta_pr_auc": -0.028693954816790712,
+        "delta_pr_auc_ci": [
+          -0.08078398638873081,
+          0.01828928522995543
+        ],
+        "delta_pr_auc_distinguishable": false,
+        "n_resamples_used": 1000,
+        "verdict_pr_auc": "inconclusive"
+      },
+      "global": {
+        "f1": 0.5714285714285714,
+        "false_positive_rate": 0.10091743119266056,
+        "pr_auc": 0.668347485085174,
+        "precision": 0.45,
+        "recall": 0.782608695652174
+      },
+      "per_scenario_recall": {
+        "global": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.5
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 0.6666666666666666
+          }
+        },
+        "per_user": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.5
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 0.5
+          }
+        }
+      },
+      "per_user": {
+        "f1": 0.53125,
+        "false_positive_rate": 0.11009174311926606,
+        "pr_auc": 0.6396535302683833,
+        "precision": 0.4146341463414634,
+        "recall": 0.7391304347826086
+      }
+    },
+    "ocsvm": {
+      "by_history": {
+        "global": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.04128440366972477,
+            "recall": 0.9565217391304348,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        },
+        "per_user": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.03669724770642202,
+            "recall": 0.8260869565217391,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        }
+      },
+      "delta": {
+        "delta_f1": -0.05481481481481476,
+        "delta_f1_ci": [
+          -0.16028515492990572,
+          0.02090880078684961
+        ],
+        "delta_f1_distinguishable": false,
+        "delta_pr_auc": 0.006538846822797595,
+        "delta_pr_auc_ci": [
+          -0.015392084806346306,
+          0.03568127881666234
+        ],
+        "delta_pr_auc_distinguishable": false,
+        "n_resamples_used": 1000,
+        "verdict_pr_auc": "inconclusive"
+      },
+      "global": {
+        "f1": 0.8148148148148149,
+        "false_positive_rate": 0.04128440366972477,
+        "pr_auc": 0.8620563938610486,
+        "precision": 0.7096774193548387,
+        "recall": 0.9565217391304348
+      },
+      "per_scenario_recall": {
+        "global": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.8333333333333334
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 1.0
+          }
+        },
+        "per_user": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.6666666666666666
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 0.5
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 1.0
+          }
+        }
+      },
+      "per_user": {
+        "f1": 0.76,
+        "false_positive_rate": 0.03669724770642202,
+        "pr_auc": 0.8685952406838462,
+        "precision": 0.7037037037037037,
+        "recall": 0.8260869565217391
+      }
+    },
+    "rule": {
+      "by_history": {
+        "global": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.0,
+            "recall": 0.43478260869565216,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        },
+        "per_user": {
+          "enough_history": {
+            "attack_windows": 23,
+            "false_positive_rate": 0.0,
+            "recall": 0.43478260869565216,
+            "windows": 241
+          },
+          "low_history": {
+            "attack_windows": 0,
+            "false_positive_rate": null,
+            "recall": null,
+            "windows": 0
+          }
+        }
+      },
+      "delta": {
+        "delta_f1": 0.0,
+        "delta_f1_ci": [
+          0.0,
+          0.0
+        ],
+        "delta_f1_distinguishable": false,
+        "delta_pr_auc": 0.0,
+        "delta_pr_auc_ci": [
+          0.0,
+          0.0
+        ],
+        "delta_pr_auc_distinguishable": false,
+        "n_resamples_used": 1000,
+        "verdict_pr_auc": "no_change"
+      },
+      "global": {
+        "f1": 0.6060606060606061,
+        "false_positive_rate": 0.0,
+        "pr_auc": 0.5496267682609756,
+        "precision": 1.0,
+        "recall": 0.43478260869565216
+      },
+      "per_scenario_recall": {
+        "global": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.0
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 0.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 0.5
+          }
+        },
+        "per_user": {
+          "brute_force": {
+            "n_windows": 3,
+            "recall": 1.0
+          },
+          "distributed_brute_force": {
+            "n_windows": 4,
+            "recall": 1.0
+          },
+          "new_ip_login": {
+            "n_windows": 6,
+            "recall": 0.0
+          },
+          "off_hours_login": {
+            "n_windows": 4,
+            "recall": 0.0
+          },
+          "success_after_failures": {
+            "n_windows": 6,
+            "recall": 0.5
+          }
+        }
+      },
+      "per_user": {
+        "f1": 0.6060606060606061,
+        "false_positive_rate": 0.0,
+        "pr_auc": 0.5496267682609756,
+        "precision": 1.0,
+        "recall": 0.43478260869565216
+      }
+    }
+  },
+  "n_test_attacks": 23,
+  "n_test_windows": 241,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ]
+}

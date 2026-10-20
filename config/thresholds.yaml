@@ -1,0 +1,22 @@
+# Decision thresholds and rule settings, kept apart from the pipeline settings in config.yaml.
+# Loaded by logad.config.load_config() (DEFAULTS < config.yaml < thresholds.yaml < overrides).
+# None of these are ever tuned on the test split. Calibrated numeric cut-points (the actual score thresholds)
+# are written by training/calibration to data/processed/<dataset>/models/<tag>/{thresholds.json,scoring.json}.
+
+scoring:
+  # Tier cut-points are the lowest validation thresholds whose precision reaches each target
+  # (LOW = the Phase 2 max-F1 threshold). Unreachable tiers are reported, not invented.
+  tier_precision_targets: {MEDIUM: 0.75, HIGH: 0.90, CRITICAL: 0.97}
+  tier_min_true_positives: 3        # a target must be met with at least this many validation attacks flagged
+  rules:
+    r1: {enabled: true, min_failed: 10, min_distinct_ips: 5}   # distributed brute force
+    r2: {enabled: true}                                         # success after repeated failures (feature success_after_failed)
+    r3: {enabled: true, min_failed: 1}                          # blocklisted IP plus failures
+  rule_floors: {R1: HIGH, R2: CRITICAL, R3: MEDIUM}             # a rule hit raises the tier to at least this
+  evidence_top_k: 3                 # most-deviating features listed per flagged window (|robust z| >= 3)
+
+unlabeled:
+  # Real, unlabeled logs: no labels means no calibrated precision. Tiers are score quantiles on the validation
+  # split, so they say "unusual for THIS log", not "attack", and flag a fixed share of windows by construction.
+  tier_quantiles: {LOW: 0.95, MEDIUM: 0.98, HIGH: 0.99, CRITICAL: 0.995}
+  proxy_min_failed: 5               # weak proxy for the report only: window with at least this many failed logins

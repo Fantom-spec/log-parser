@@ -1,0 +1,32 @@
+{
+  "dataset": "synthetic",
+  "detection_delay": {
+    "delay_seconds": {
+      "max": 297.0,
+      "median": 146.0,
+      "min": 1.0,
+      "p95": 291.29999999999995
+    },
+    "detected": 59,
+    "incidents": 60,
+    "missed": 1,
+    "missed_ids": [
+      "INC039"
+    ],
+    "note": "delay = close of first flagged window minus first attack event; late events would add a grace period",
+    "scope": "all splits (includes training-period incidents); a detection-timing demo, not an accuracy estimate",
+    "window_seconds": 300
+  },
+  "latency": {
+    "events": 6918,
+    "events_per_second_end_to_end": 17183.715423603702,
+    "model_scoring_s": 0.05970954300000031,
+    "ms_per_window_end_to_end": 0.33549205499999996,
+    "ms_per_window_model_only": 0.04975795250000026,
+    "note": "wall-clock on this machine, single process, whole log in memory",
+    "parse_and_features_s": 0.3428809229999996,
+    "windows": 1200
+  },
+  "model_id": "iforest_seed42",
+  "repeats": 3
+}
